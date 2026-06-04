@@ -20,11 +20,12 @@ def get_insights_data():
         fy_end = f"{today_dt.year}-03-31"
 
     annual_sales = frappe.db.sql("""
-        SELECT SUM(base_net_total) as total
-        FROM `tabSales Order`
+        SELECT
+            SUM(base_net_total) as total,
+            COUNT(name) as count
+        FROM `tabSales Invoice`
         WHERE docstatus = 1
-        AND status NOT IN ('Closed', 'Cancelled')
-        AND transaction_date BETWEEN %s AND %s
+        AND posting_date BETWEEN %s AND %s
     """, (fy_start, fy_end), as_dict=True)
 
     # Sales Orders To Deliver
@@ -55,11 +56,11 @@ def get_insights_data():
         FROM (
             SELECT
                 customer,
-                DATEDIFF(CURDATE(), MAX(transaction_date)) as days_since_last_order
-            FROM `tabSales Order`
+                DATEDIFF(CURDATE(), MAX(posting_date)) as days_since_last_invoice
+            FROM `tabSales Invoice`
             WHERE docstatus = 1
             GROUP BY customer
-            HAVING days_since_last_order >= 30
+            HAVING days_since_last_invoice >= 180
         ) t
     """, as_dict=True)
 
@@ -93,30 +94,30 @@ def get_insights_data():
 
     current_fy_data = frappe.db.sql("""
         SELECT
-            MONTH(transaction_date) as month_no,
+            MONTH(posting_date) as month_no,
             SUM(grand_total) as total
-        FROM `tabSales Order`
+        FROM `tabSales Invoice`
         WHERE docstatus = 1
         AND (
-            (YEAR(transaction_date) = %s AND MONTH(transaction_date) >= 4)
+            (YEAR(posting_date) = %s AND MONTH(posting_date) >= 4)
             OR
-            (YEAR(transaction_date) = %s + 1 AND MONTH(transaction_date) <= 3)
+            (YEAR(posting_date) = %s + 1 AND MONTH(posting_date) <= 3)
         )
-        GROUP BY MONTH(transaction_date)
+        GROUP BY MONTH(posting_date)
     """, (current_fy_start, current_fy_start), as_dict=True)
 
     previous_fy_data = frappe.db.sql("""
         SELECT
-            MONTH(transaction_date) as month_no,
+            MONTH(posting_date) as month_no,
             SUM(grand_total) as total
-        FROM `tabSales Order`
+        FROM `tabSales Invoice`
         WHERE docstatus = 1
         AND (
-            (YEAR(transaction_date) = %s AND MONTH(transaction_date) >= 4)
+            (YEAR(posting_date) = %s AND MONTH(posting_date) >= 4)
             OR
-            (YEAR(transaction_date) = %s + 1 AND MONTH(transaction_date) <= 3)
+            (YEAR(posting_date) = %s + 1 AND MONTH(posting_date) <= 3)
         )
-        GROUP BY MONTH(transaction_date)
+        GROUP BY MONTH(posting_date)
     """, (previous_fy_start, previous_fy_start), as_dict=True)
 
     current_map = {
@@ -153,18 +154,19 @@ def get_insights_data():
             SUM(grand_total) as total
         FROM `tabSales Invoice`
         WHERE docstatus = 1
+        AND posting_date BETWEEN %s AND %s
         GROUP BY customer_name
         ORDER BY total DESC
         LIMIT 5
-    """, as_dict=True)
+    """, (fy_start, fy_end), as_dict=True)
 
     # Sales Order Analysis
     order_analysis = frappe.db.sql("""
         SELECT
             status,
             COUNT(name) as count
-        FROM `tabSales Order`
-        WHERE docstatus IN (1, 2)
+        FROM `tabSales Invoice`
+        WHERE docstatus = 1
         GROUP BY status
     """, as_dict=True)
 
@@ -173,15 +175,22 @@ def get_insights_data():
         SELECT
             item_name,
             SUM(amount) as total
-        FROM `tabSales Order Item`
+        FROM `tabSales Invoice Item`
         WHERE docstatus = 1
+        AND parent IN (
+            SELECT name
+            FROM `tabSales Invoice`
+            WHERE posting_date BETWEEN %s AND %s
+            AND docstatus = 1
+        )
         GROUP BY item_name
         ORDER BY total DESC
         LIMIT 10
-    """, as_dict=True)
+    """, (fy_start, fy_end), as_dict=True)
 
     return {
         "annual_sales": annual_sales[0].total or 0 if annual_sales else 0,
+        "annual_sales_count": annual_sales[0].count or 0 if annual_sales else 0,
         "orders_to_deliver": orders_to_deliver[0].count or 0 if orders_to_deliver else 0,
         "orders_to_bill": orders_to_bill[0].count or 0 if orders_to_bill else 0,
         "active_customers": active_customers[0].count or 0 if active_customers else 0,

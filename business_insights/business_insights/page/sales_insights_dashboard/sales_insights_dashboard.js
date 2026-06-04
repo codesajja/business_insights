@@ -68,15 +68,24 @@ frappe.pages['sales-insights-dashboard'].on_page_load = function(wrapper) {
 
                 <!-- Row 1: Our 3 KPI Cards -->
                 <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:20px; margin-bottom:20px;">
-               
+   
                     <div id="kpi-annual-sales" style="background:linear-gradient(135deg, #2490EF, #1a6fb5); border-radius:8px; padding:24px 28px; box-shadow:0 4px 12px rgba(36,144,239,0.3); color:#fff; position:relative; overflow:hidden;">
                         <div style="position:absolute; top:-20px; right:-20px; width:100px; height:100px; background:rgba(255,255,255,0.1); border-radius:50%;"></div>
 
-                        <div style="font-size:11px; text-transform:uppercase; letter-spacing:1.5px; opacity:0.85; margin-bottom:10px;">
-                            💰 Annual Sales
+                        <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; margin-bottom:10px;">
+                            $ Annual Sales
                         </div>
 
                         <div class="val" style="font-size:28px; font-weight:700;">
+                            ...
+                        </div>
+
+                        <div class="count" style="
+                            margin-top:8px;
+                            font-size:13px;
+                            opacity:0.9;
+                            text-align:right;
+                        ">
                             ...
                         </div>
                     </div>
@@ -85,11 +94,20 @@ frappe.pages['sales-insights-dashboard'].on_page_load = function(wrapper) {
 
                         <div style="position:absolute; top:-20px; right:-20px; width:100px; height:100px; background:rgba(255,255,255,0.1); border-radius:50%;"></div>
 
-                        <div style="font-size:11px; text-transform:uppercase; letter-spacing:1.5px; opacity:0.85; margin-bottom:10px;">
+                        <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; margin-bottom:10px;">
                             💵 Total Sales
                         </div>
 
                         <div class="val" style="font-size:28px; font-weight:700; margin-bottom:10px;">
+                            ...
+                        </div>
+
+                        <div class="count" style="
+                            margin-top:8px;
+                            font-size:13px;
+                            opacity:0.9;
+                            text-align:right;
+                        ">
                             ...
                         </div>
 
@@ -101,57 +119,97 @@ frappe.pages['sales-insights-dashboard'].on_page_load = function(wrapper) {
 
                     <div id="kpi-new-customers" style="background:linear-gradient(135deg, #36B37E, #27855c); border-radius:8px; padding:24px 28px; box-shadow:0 4px 12px rgba(54,179,126,0.3); color:#fff; position:relative; overflow:hidden;">
                         <div style="position:absolute; top:-20px; right:-20px; width:100px; height:100px; background:rgba(255,255,255,0.1); border-radius:50%;"></div>
-                        <div style="font-size:11px; text-transform:uppercase; letter-spacing:1.5px; opacity:0.85; margin-bottom:10px;">👥 New Customers</div>
-                        <div class="val" style="font-size:28px; font-weight:700; margin-bottom:10px;">...</div>
-                        <span style="background:rgba(255,255,255,0.2); border-radius:20px; padding:3px 10px; font-size:11px;" class="customer-period-label">Last 30 Days</span>
+
+                        <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1.5px;  margin-bottom:10px;">
+                            👥 New Customers
+                        </div>
+
+                        <div class="val" style="font-size:28px; font-weight:700; margin-bottom:10px;">
+                            ...
+                        </div>
+
+                        <span style="background:rgba(255,255,255,0.2); border-radius:20px; padding:3px 10px; font-size:11px;" class="customer-period-label">
+                            Last 30 Days
+                        </span>
                     </div>
+
                     <div id="kpi-today-sales" style="background:linear-gradient(135deg, #FF5630, #cc3d1f); border-radius:8px; padding:24px 28px; box-shadow:0 4px 12px rgba(255,86,48,0.3); color:#fff; position:relative; overflow:hidden;">
                         <div style="position:absolute; top:-20px; right:-20px; width:100px; height:100px; background:rgba(255,255,255,0.1); border-radius:50%;"></div>
-                        <div style="font-size:11px; text-transform:uppercase; letter-spacing:1.5px; opacity:0.85; margin-bottom:10px;">📅 Today's Sales</div>
-                        <div class="val" style="font-size:28px; font-weight:700; margin-bottom:10px;">...</div>
+
+                        <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; margin-bottom:10px;">
+                            📅 Today's Sales
+                        </div>
+
+                        <div class="val" style="font-size:28px; font-weight:700; margin-bottom:10px;">
+                            ...
+                        </div>
+
+                        <div class="count" style="
+                            margin-top:8px;
+                            font-size:13px;
+                            opacity:0.9;
+                            text-align:right;
+                        ">
+                            ...
+                        </div>
                     </div>
                 </div>
 
                 <!-- Row 2: Standard Selling Cards -->
                 <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:20px; margin-bottom:20px;">
-                
-                  
-                    
+
                     <div id="kpi-orders-deliver"
                         style="
                             background:#FFF8E1;
                             color:#D68900;
                             border-radius:8px;
-                            padding:20px;
+                            padding:6px 20px;
                             border:1px solid #FFE082;
                         ">
-                   
-                        <div style="font-size:11px; text-transform:uppercase; letter-spacing:1px; color:#888; margin-bottom:8px;">Sales Orders to Deliver</div>
-                        <div class="val" style="font-size:22px; font-weight:700; color:#333;">...</div>
+
+                        <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:#454545; margin-bottom:8px;">
+                            Sales Orders to Deliver
+                        </div>
+
+                        <div class="val" style="font-size:22px; font-weight:700; color:#333;">
+                            ...
+                        </div>
                     </div>
+
                     <div id="kpi-orders-bill"
                         style="
                             background:#FFEAEA;
                             color:#D84315;
                             border-radius:8px;
-                            padding:20px;
+                            padding:6px 20px;
                             border:1px solid #FFCDD2;
                         ">
-                    
-                        <div style="font-size:11px; text-transform:uppercase; letter-spacing:1px; color:#888; margin-bottom:8px;">Sales Orders to Bill</div>
-                        <div class="val" style="font-size:22px; font-weight:700; color:#333;">...</div>
+
+                        <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:#454545; margin-bottom:8px;">
+                            Sales Orders to Bill
+                        </div>
+
+                        <div class="val" style="font-size:22px; font-weight:700; color:#333;">
+                            ...
+                        </div>
                     </div>
+
                     <div id="kpi-active-customers"
                         style="
                             background:#EAF4FF;
                             color:#1565C0;
                             border-radius:8px;
-                            padding:20px;
+                            padding:6px 20px;
                             border:1px solid #BBDEFB;
                         ">
-                    
-                        <div style="font-size:11px; text-transform:uppercase; letter-spacing:1px; color:#888; margin-bottom:8px;">Total Customers</div>
-                        <div class="val" style="font-size:22px; font-weight:700; color:#333; margin-bottom:10px;">...</div>
+
+                        <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:#454545; margin-bottom:8px;">
+                            Total Customers
+                        </div>
+
+                        <div class="val" style="font-size:22px; font-weight:700; color:#333; margin-bottom:10px;">
+                            ...
+                        </div>
 
                         <div class="view-active-customers"
                             style="
@@ -160,44 +218,54 @@ frappe.pages['sales-insights-dashboard'].on_page_load = function(wrapper) {
                                 font-weight:600;
                                 cursor:pointer;
                                 text-decoration:underline;
+                                display:block;
+                                width:100%;
+                                text-align:right;
                             ">
-                            View Customers →
+                            View Details →
                         </div>
                     </div>
+
                     <div id="kpi-inactive-customers"
-                    style="
-                        background:#E8D9FA;
-                        color:#C62828;
-                        border-radius:8px;
-                        padding:20px;
-                        border:1px solid #F5B5B5;
-                    ">
-                    
-                    <div style="font-size:11px; text-transform:uppercase; letter-spacing:1px; color:#888; margin-bottom:8px;">
-                        Inactive Customers
-                    </div>
-                    <div class="val" style="font-size:22px; font-weight:700; color:#333; margin-bottom:10px;">...</div>
-
-                    <div class="view-inactive-customers"
                         style="
-                            font-size:12px;
-                            color:#8E44AD;
-                            font-weight:600;
-                            cursor:pointer;
-                            text-decoration:underline;
+                            background:#E8D9FA;
+                            color:#C62828;
+                            border-radius:8px;
+                            padding:6px 20px;
+                            border:1px solid #F5B5B5;
                         ">
-                        View Customers →
+
+                        <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:#454545; margin-bottom:8px;">
+                            Inactive Customers
+                        </div>
+
+                        <div class="val" style="font-size:22px; font-weight:700; color:#333; margin-bottom:10px;">
+                            ...
+                        </div>
+
+                        <div class="view-inactive-customers"
+                            style="
+                                font-size:12px;
+                                color:#8E44AD;
+                                font-weight:600;
+                                cursor:pointer;
+                                text-decoration:underline;
+                                display:block;
+                                width:100%;
+                                text-align:right;
+                            ">
+                            View Details →
+                        </div>
+
                     </div>
 
-                    
-                </div>
                 </div>
 
                 <!-- Row 3: Sales Order Trends (Full Width) -->
                 <div style="
                     background:#fff;
                     border-radius:8px;
-                    padding:20px;
+                    padding:14px 20px;
                     box-shadow:0 1px 4px rgba(0,0,0,0.1);
                     margin:0 0px 20px;
                     min-height:500px;
@@ -278,7 +346,7 @@ frappe.pages['sales-insights-dashboard'].on_page_load = function(wrapper) {
                             color:#333;
                             margin-bottom:4px;
                         ">
-                            📊 Sales Order Analysis
+                            📊 Category-Wise Sales Order Analysis
                         </div>
 
                         <div style="
@@ -311,7 +379,7 @@ frappe.pages['sales-insights-dashboard'].on_page_load = function(wrapper) {
                         color:#333;
                         margin-bottom:4px;
                     ">
-                        📦 Item-wise Annual Sales
+                        📦 Item-Wise Annual Sales
                     </div>
 
                     <div style="
@@ -319,7 +387,7 @@ frappe.pages['sales-insights-dashboard'].on_page_load = function(wrapper) {
                         font-size:13px;
                         margin-bottom:12px;
                     ">
-                        Top Selling Products by Revenue
+                        Top 10 Selling Products by Revenue
                     </div>
 
                     <div id="item-annual-sales-chart"></div>
@@ -364,45 +432,68 @@ function load_sales_kpi(days, wrapper) {
     frappe.call({
         method: 'frappe.client.get_list',
         args: {
-            doctype: 'Sales Order',
+            doctype: 'Sales Invoice',
             filters: [
-                ['transaction_date', '>=', from_date],
-                ['transaction_date', '<=', today],
+                ['posting_date', '>=', from_date],
+                ['posting_date', '<=', today],
                 ['docstatus', '=', 1]
             ],
-            fields: ['sum(base_net_total) as total'],
+            fields: [
+                'sum(base_net_total) as total',
+                'count(name) as count'
+            ],
             limit: 0
         },
         callback: function(r) {
+
             var val = r.message && r.message[0]
                 ? r.message[0].total
+                : 0;
+
+            var count = r.message && r.message[0]
+                ? r.message[0].count
                 : 0;
 
             $(wrapper).find('#kpi-total-sales .val').html(
                 frappe.format(val || 0, { fieldtype: 'Currency' })
             );
+
+            $(wrapper).find('#kpi-total-sales .count').text(
+                (count || 0) + ' Sales'
+            );
         }
     });
-
     // Today's Sales (Sales order)
     frappe.call({
         method: 'frappe.client.get_list',
         args: {
-            doctype: 'Sales Order',
+            doctype: 'Sales Invoice',
             filters: [
-                ['transaction_date', '=', today],
+                ['posting_date', '=', today],
                 ['docstatus', '=', 1]
             ],
-            fields: ['sum(base_net_total) as total'],
+            fields: [
+                'sum(base_net_total) as total',
+                'count(name) as count'
+            ],
             limit: 0
         },
         callback: function(r) {
+
             var val = r.message && r.message[0]
                 ? r.message[0].total
                 : 0;
 
+            var count = r.message && r.message[0]
+                ? r.message[0].count
+                : 0;
+
             $(wrapper).find('#kpi-today-sales .val').html(
                 frappe.format(val || 0, { fieldtype: 'Currency' })
+            );
+
+            $(wrapper).find('#kpi-today-sales .count').text(
+                (count || 0) + ' Sales'
             );
         }
     });
@@ -453,6 +544,10 @@ function load_all_data(wrapper) {
                 frappe.format(d.annual_sales || 0, { fieldtype: 'Currency' })
             );
 
+            $(wrapper).find('#kpi-annual-sales .count').text(
+                (d.annual_sales_count || 0) + ' Sales'
+            );
+
             $(wrapper).find('#kpi-orders-deliver .val').text(
                 d.orders_to_deliver || 0
             );
@@ -460,6 +555,7 @@ function load_all_data(wrapper) {
             $(wrapper).find('#kpi-orders-bill .val').text(
                 d.orders_to_bill || 0
             );
+
             $(wrapper).find('#kpi-active-customers .val').text(
                 d.active_customers || 0
             );
@@ -469,12 +565,13 @@ function load_all_data(wrapper) {
             );
 
             $(wrapper).find('#kpi-active-customers').css('cursor', 'pointer');
-            $(wrapper).find('.view-active-customers').on('click', function() {
 
+            $(wrapper).find('.view-active-customers').on('click', function() {
                 frappe.set_route('List', 'Customer');
             });
 
             $(wrapper).find('#kpi-inactive-customers').css('cursor', 'pointer');
+
             $(wrapper).find('.view-inactive-customers').on('click', function() {
 
                 frappe.set_route(
@@ -482,7 +579,7 @@ function load_all_data(wrapper) {
                     "Inactive Customers",
                     {
                         days_since_last_order: 180,
-                        doctype: "Sales Order"
+                        doctype: "Sales Invoice"
                     }
                 );
             });
@@ -525,7 +622,7 @@ function load_all_data(wrapper) {
                             margin-bottom:10px;
                             background:#f8f9fa;
                             border-radius:10px;
-                            border-left:4px solid #2490EF;
+                            border-left:4px solid #1E40AF;
                             transition:all .2s ease;
                         ">
 
@@ -537,7 +634,7 @@ function load_all_data(wrapper) {
                                     width:32px;
                                     height:32px;
                                     border-radius:50%;
-                                    background:#2490EF;
+                                    background:#1E40AF;
                                     color:#fff;
                                     display:flex;
                                     align-items:center;
@@ -648,7 +745,7 @@ function render_chart(selector, wrapper, labels, values, type) {
             }]
         },
         height: 420,
-        colors: ['#2490EF']
+        colors: ['#468C50']
     });
 }
 
@@ -668,7 +765,7 @@ function render_sales_order_analysis(
         type: 'pie',
         height: 380,
 
-        showLegend: false,
+        showLegend: true,
 
         data: {
             labels: labels,
