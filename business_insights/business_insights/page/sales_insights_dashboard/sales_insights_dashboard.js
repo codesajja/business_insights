@@ -21,11 +21,20 @@ frappe.pages['sales-insights-dashboard'].on_page_load = function(wrapper) {
                 <div style="display:flex; justify-content:flex-end; align-items:center; gap:20px; margin-bottom:24px; padding:0 20px;">
 
                     <div style="display:flex; align-items:center; gap:10px;">
-                        <span style="font-size:13px; color:#888; font-weight:500;">
+                        <span style="font-size:13px; color:#333; font-weight:700;">
                             Sales Period:
                         </span>
 
-                        <select id="sales-period" style="padding:8px 16px; border-radius:20px; border:1px solid #ddd; font-size:13px; background:#fff;">
+                        <select id="sales-period" style="
+                            padding:10px 18px;
+                            border-radius:20px;
+                            border:1px solid #2490EF;
+                            font-size:13px;
+                            font-weight:600;
+                            color:#FFFFFF;
+                            background:#31328F;
+                            cursor:pointer;
+                        ">
                             <option value="7">Last 7 Days</option>
                             <option value="15">Last 15 Days</option>
                             <option value="30" selected>Last 30 Days</option>
@@ -34,11 +43,20 @@ frappe.pages['sales-insights-dashboard'].on_page_load = function(wrapper) {
                     </div>
 
                     <div style="display:flex; align-items:center; gap:10px;">
-                        <span style="font-size:13px; color:#888; font-weight:500;">
+                        <span style="font-size:13px; color:#333; font-weight:700;">
                             Customer Period:
                         </span>
 
-                        <select id="customer-period" style="padding:8px 16px; border-radius:20px; border:1px solid #ddd; font-size:13px; background:#fff;">
+                        <select id="customer-period" style="
+                            padding:10px 18px;
+                            border-radius:20px;
+                            border:1px solid #36B37E;
+                            font-size:13px;
+                            font-weight:600;
+                            color:#fff;
+                            background:#447544;
+                            cursor:pointer;
+                        ">
                             <option value="7">Last 7 Days</option>
                             <option value="15">Last 15 Days</option>
                             <option value="30" selected>Last 30 Days</option>
@@ -49,14 +67,38 @@ frappe.pages['sales-insights-dashboard'].on_page_load = function(wrapper) {
                 </div>
 
                 <!-- Row 1: Our 3 KPI Cards -->
-                <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:20px; margin-bottom:20px;">
+                <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:20px; margin-bottom:20px;">
                
-                    <div id="kpi-total-sales" style="background:linear-gradient(135deg, #2490EF, #1a6fb5); border-radius:8px; padding:24px 28px; box-shadow:0 4px 12px rgba(36,144,239,0.3); color:#fff; position:relative; overflow:hidden;">
+                    <div id="kpi-annual-sales" style="background:linear-gradient(135deg, #2490EF, #1a6fb5); border-radius:8px; padding:24px 28px; box-shadow:0 4px 12px rgba(36,144,239,0.3); color:#fff; position:relative; overflow:hidden;">
                         <div style="position:absolute; top:-20px; right:-20px; width:100px; height:100px; background:rgba(255,255,255,0.1); border-radius:50%;"></div>
-                        <div style="font-size:11px; text-transform:uppercase; letter-spacing:1.5px; opacity:0.85; margin-bottom:10px;">💰 Total Sales</div>
-                        <div class="val" style="font-size:28px; font-weight:700; margin-bottom:10px;">...</div>
-                        <span style="background:rgba(255,255,255,0.2); border-radius:20px; padding:3px 10px; font-size:11px;" class="sales-period-label">Last 30 Days</span>
+
+                        <div style="font-size:11px; text-transform:uppercase; letter-spacing:1.5px; opacity:0.85; margin-bottom:10px;">
+                            💰 Annual Sales
+                        </div>
+
+                        <div class="val" style="font-size:28px; font-weight:700;">
+                            ...
+                        </div>
                     </div>
+
+                    <div id="kpi-total-sales" style="background:linear-gradient(135deg, #8B5CF6, #6D28D9); border-radius:8px; padding:24px 28px; box-shadow:0 4px 12px rgba(139,92,246,0.3); color:#fff; position:relative; overflow:hidden;">
+
+                        <div style="position:absolute; top:-20px; right:-20px; width:100px; height:100px; background:rgba(255,255,255,0.1); border-radius:50%;"></div>
+
+                        <div style="font-size:11px; text-transform:uppercase; letter-spacing:1.5px; opacity:0.85; margin-bottom:10px;">
+                            💵 Total Sales
+                        </div>
+
+                        <div class="val" style="font-size:28px; font-weight:700; margin-bottom:10px;">
+                            ...
+                        </div>
+
+                        <span style="background:rgba(255,255,255,0.2); border-radius:20px; padding:3px 10px; font-size:11px;" class="sales-period-label-small">
+                            Last 30 Days
+                        </span>
+
+                    </div>
+
                     <div id="kpi-new-customers" style="background:linear-gradient(135deg, #36B37E, #27855c); border-radius:8px; padding:24px 28px; box-shadow:0 4px 12px rgba(54,179,126,0.3); color:#fff; position:relative; overflow:hidden;">
                         <div style="position:absolute; top:-20px; right:-20px; width:100px; height:100px; background:rgba(255,255,255,0.1); border-radius:50%;"></div>
                         <div style="font-size:11px; text-transform:uppercase; letter-spacing:1.5px; opacity:0.85; margin-bottom:10px;">👥 New Customers</div>
@@ -67,25 +109,13 @@ frappe.pages['sales-insights-dashboard'].on_page_load = function(wrapper) {
                         <div style="position:absolute; top:-20px; right:-20px; width:100px; height:100px; background:rgba(255,255,255,0.1); border-radius:50%;"></div>
                         <div style="font-size:11px; text-transform:uppercase; letter-spacing:1.5px; opacity:0.85; margin-bottom:10px;">📅 Today's Sales</div>
                         <div class="val" style="font-size:28px; font-weight:700; margin-bottom:10px;">...</div>
-                        <span style="background:rgba(255,255,255,0.2); border-radius:20px; padding:3px 10px; font-size:11px;">Today</span>
                     </div>
                 </div>
 
                 <!-- Row 2: Standard Selling Cards -->
                 <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:20px; margin-bottom:20px;">
                 
-                    <div id="kpi-annual-sales"
-                        style="
-                            background:#E8F8F0;
-                            color:#27855C;
-                            border-radius:8px;
-                            padding:20px;
-                            border:1px solid #B7E4CC;
-                        ">
-                                       
-                        <div style="font-size:11px; text-transform:uppercase; letter-spacing:1px; color:#888; margin-bottom:8px;">Annual Sales</div>
-                        <div class="val" style="font-size:22px; font-weight:700; color:#333;">...</div>
-                    </div>
+                  
                     
                     <div id="kpi-orders-deliver"
                         style="
@@ -120,9 +150,47 @@ frappe.pages['sales-insights-dashboard'].on_page_load = function(wrapper) {
                             border:1px solid #BBDEFB;
                         ">
                     
-                        <div style="font-size:11px; text-transform:uppercase; letter-spacing:1px; color:#888; margin-bottom:8px;">Active Customers</div>
-                        <div class="val" style="font-size:22px; font-weight:700; color:#333;">...</div>
+                        <div style="font-size:11px; text-transform:uppercase; letter-spacing:1px; color:#888; margin-bottom:8px;">Total Customers</div>
+                        <div class="val" style="font-size:22px; font-weight:700; color:#333; margin-bottom:10px;">...</div>
+
+                        <div class="view-active-customers"
+                            style="
+                                font-size:12px;
+                                color:#1565C0;
+                                font-weight:600;
+                                cursor:pointer;
+                                text-decoration:underline;
+                            ">
+                            View Customers →
+                        </div>
                     </div>
+                    <div id="kpi-inactive-customers"
+                    style="
+                        background:#E8D9FA;
+                        color:#C62828;
+                        border-radius:8px;
+                        padding:20px;
+                        border:1px solid #F5B5B5;
+                    ">
+                    
+                    <div style="font-size:11px; text-transform:uppercase; letter-spacing:1px; color:#888; margin-bottom:8px;">
+                        Inactive Customers
+                    </div>
+                    <div class="val" style="font-size:22px; font-weight:700; color:#333; margin-bottom:10px;">...</div>
+
+                    <div class="view-inactive-customers"
+                        style="
+                            font-size:12px;
+                            color:#8E44AD;
+                            font-weight:600;
+                            cursor:pointer;
+                            text-decoration:underline;
+                        ">
+                        View Customers →
+                    </div>
+
+                    
+                </div>
                 </div>
 
                 <!-- Row 3: Sales Order Trends (Full Width) -->
@@ -134,10 +202,31 @@ frappe.pages['sales-insights-dashboard'].on_page_load = function(wrapper) {
                     margin:0 0px 20px;
                     min-height:500px;
                 ">
-                <div style="font-size:14px; font-weight:600; color:#333; margin-bottom:16px;">Sales Order Trends</div>
-                    <div id="sales-order-trends-chart"></div>
-                </div>
 
+                    <div style="
+                        display:flex;
+                        justify-content:space-between;
+                        align-items:center;
+                        margin-bottom:16px;
+                    ">
+
+                       
+
+                     <div style="
+                        font-size:14px;
+                        font-weight:600;
+                        color:#333;
+                        margin-bottom:16px;
+                    ">
+                        Sales Order Trends (Current FY vs Previous FY)
+                    </div>
+
+                    </div>
+
+                    <div id="sales-order-trends-chart"></div>
+
+                </div>
+                
                 <!-- Row 4: Top Customers + Sales Order Analysis -->
                 <div style="
                     display:grid;
@@ -146,6 +235,7 @@ frappe.pages['sales-insights-dashboard'].on_page_load = function(wrapper) {
                     margin:0 0px 20px;
                 ">
 
+                    <!-- Top Customers -->
                     <div style="
                         background:#fff;
                         border-radius:8px;
@@ -154,17 +244,26 @@ frappe.pages['sales-insights-dashboard'].on_page_load = function(wrapper) {
                         min-height:500px;
                     ">
                         <div style="
-                            font-size:14px;
-                            font-weight:600;
+                            font-size:18px;
+                            font-weight:700;
                             color:#333;
-                            margin-bottom:16px;
+                            margin-bottom:4px;
                         ">
-                            Top Customers
+                            🏆 Top Customers
+                        </div>
+
+                        <div style="
+                            color:#6B7280;
+                            font-size:13px;
+                            margin-bottom:12px;
+                        ">
+                            Top 5 Customers by Sales Revenue
                         </div>
 
                         <div id="top-customers-chart"></div>
                     </div>
 
+                    <!-- Sales Order Analysis -->
                     <div style="
                         background:#fff;
                         border-radius:8px;
@@ -172,20 +271,30 @@ frappe.pages['sales-insights-dashboard'].on_page_load = function(wrapper) {
                         box-shadow:0 1px 4px rgba(0,0,0,0.1);
                         min-height:500px;
                     ">
+
                         <div style="
-                            font-size:14px;
-                            font-weight:600;
+                            font-size:18px;
+                            font-weight:700;
                             color:#333;
-                            margin-bottom:16px;
+                            margin-bottom:4px;
                         ">
-                            Sales Order Analysis
+                            📊 Sales Order Analysis
                         </div>
 
+                        <div style="
+                            color:#6B7280;
+                            font-size:13px;
+                            margin-bottom:12px;
+                        ">
+                            Distribution of Sales Orders by Status
+                        </div>
+
+
                         <div id="sales-order-analysis-chart"></div>
+
                     </div>
 
-                </div>               
-
+                </div>
                 <!-- Row 5: Item-wise Annual Sales (Full Width) -->
                 <div style="
                     background:#fff;
@@ -195,10 +304,31 @@ frappe.pages['sales-insights-dashboard'].on_page_load = function(wrapper) {
                     margin:0 0px 20px;
                     min-height:550px;
                 ">
-                <div style="font-size:14px; font-weight:600; color:#333; margin-bottom:16px;">Item-wise Annual Sales</div>
+
+                    <div style="
+                        font-size:18px;
+                        font-weight:700;
+                        color:#333;
+                        margin-bottom:4px;
+                    ">
+                        📦 Item-wise Annual Sales
+                    </div>
+
+                    <div style="
+                        color:#6B7280;
+                        font-size:13px;
+                        margin-bottom:12px;
+                    ">
+                        Top Selling Products by Revenue
+                    </div>
+
                     <div id="item-annual-sales-chart"></div>
+
                 </div>
 
+                             
+
+                
             </div>
         `);
 
@@ -210,6 +340,8 @@ frappe.pages['sales-insights-dashboard'].on_page_load = function(wrapper) {
             load_customer_kpi($(this).val(), wrapper);
         });
 
+        
+
         load_sales_kpi(30, wrapper);
         load_customer_kpi(30, wrapper);
         load_all_data(wrapper);
@@ -219,41 +351,63 @@ frappe.pages['sales-insights-dashboard'].on_page_load = function(wrapper) {
 
 function load_sales_kpi(days, wrapper) {
     days = days || 30;
+
     var label = 'Last ' + days + ' Days';
+
     $(wrapper).find('.sales-period-label').text(label);
+    $(wrapper).find('.sales-period-label-small').text(label);
 
     var today = frappe.datetime.get_today();
     var from_date = frappe.datetime.add_days(today, -parseInt(days));
 
+    // Total Sales (Selected Period - Sales Order)
     frappe.call({
         method: 'frappe.client.get_list',
         args: {
-            doctype: 'Sales Invoice',
-            filters: [['posting_date', '>=', from_date], ['posting_date', '<=', today], ['docstatus', '=', 1]],
-            fields: ['sum(grand_total) as total'],
+            doctype: 'Sales Order',
+            filters: [
+                ['transaction_date', '>=', from_date],
+                ['transaction_date', '<=', today],
+                ['docstatus', '=', 1]
+            ],
+            fields: ['sum(base_net_total) as total'],
             limit: 0
         },
         callback: function(r) {
-            var val = r.message && r.message[0] ? r.message[0].total : 0;
-            $(wrapper).find('#kpi-total-sales .val').html(frappe.format(val || 0, {fieldtype: 'Currency'}));
+            var val = r.message && r.message[0]
+                ? r.message[0].total
+                : 0;
+
+            $(wrapper).find('#kpi-total-sales .val').html(
+                frappe.format(val || 0, { fieldtype: 'Currency' })
+            );
         }
     });
 
-  
-
+    // Today's Sales (Sales order)
     frappe.call({
         method: 'frappe.client.get_list',
         args: {
-            doctype: 'Sales Invoice',
-            filters: [['posting_date', '=', today], ['docstatus', '=', 1]],
-            fields: ['sum(grand_total) as total'],
+            doctype: 'Sales Order',
+            filters: [
+                ['transaction_date', '=', today],
+                ['docstatus', '=', 1]
+            ],
+            fields: ['sum(base_net_total) as total'],
             limit: 0
         },
         callback: function(r) {
-            var val = r.message && r.message[0] ? r.message[0].total : 0;
-            $(wrapper).find('#kpi-today-sales .val').html(frappe.format(val || 0, {fieldtype: 'Currency'}));
+            var val = r.message && r.message[0]
+                ? r.message[0].total
+                : 0;
+
+            $(wrapper).find('#kpi-today-sales .val').html(
+                frappe.format(val || 0, { fieldtype: 'Currency' })
+            );
         }
     });
+
+   
 }
 
 function load_customer_kpi(days, wrapper) {
@@ -287,10 +441,12 @@ function load_customer_kpi(days, wrapper) {
 function load_all_data(wrapper) {
     frappe.call({
         method: 'business_insights.business_insights.sales_insights_api.get_insights_data',
+        
         callback: function(r) {
             if (!r.message) return;
 
             var d = r.message;
+            
 
             // KPI Cards
             $(wrapper).find('#kpi-annual-sales .val').html(
@@ -304,20 +460,44 @@ function load_all_data(wrapper) {
             $(wrapper).find('#kpi-orders-bill .val').text(
                 d.orders_to_bill || 0
             );
-
             $(wrapper).find('#kpi-active-customers .val').text(
                 d.active_customers || 0
             );
 
-            // Sales Order Trends
-            if (d.trends && d.trends.length) {
+            $(wrapper).find('#kpi-inactive-customers .val').text(
+                d.inactive_customers || 0
+            );
 
-                render_chart(
+            $(wrapper).find('#kpi-active-customers').css('cursor', 'pointer');
+            $(wrapper).find('.view-active-customers').on('click', function() {
+
+                frappe.set_route('List', 'Customer');
+            });
+
+            $(wrapper).find('#kpi-inactive-customers').css('cursor', 'pointer');
+            $(wrapper).find('.view-inactive-customers').on('click', function() {
+
+                frappe.set_route(
+                    "query-report",
+                    "Inactive Customers",
+                    {
+                        days_since_last_order: 180,
+                        doctype: "Sales Order"
+                    }
+                );
+            });
+
+            // Sales Order Trends
+            if (d.trend_months && d.trend_months.length) {
+
+                render_comparison_chart(
                     '#sales-order-trends-chart',
                     wrapper,
-                    d.trends.map(x => x.month),
-                    d.trends.map(x => x.total || 0),
-                    'line'
+                    d.trend_months,
+                    d.current_fy_trends,
+                    d.previous_fy_trends,
+                    d.current_fy_label,
+                    d.previous_fy_label
                 );
 
             } else {
@@ -408,14 +588,21 @@ function load_all_data(wrapper) {
 
             // Sales Order Analysis
             if (d.order_analysis && d.order_analysis.length) {
-
-                render_chart(
+                                
+                render_sales_order_analysis(
                     '#sales-order-analysis-chart',
                     wrapper,
-                    d.order_analysis.map(x => x.status),
-                    d.order_analysis.map(x => x.count || 0),
-                    'pie'
+                    d.order_analysis.map(x => {
+                        if (x.status === "To Deliver and Bill") {
+                            return "To Deliver & Bill";
+                        }
+                        return x.status;
+                    }),
+                    d.order_analysis.map(x => x.count || 0)
                 );
+
+                
+
 
             } else {
 
@@ -447,15 +634,105 @@ function load_all_data(wrapper) {
 
 function render_chart(selector, wrapper, labels, values, type) {
     var $el = $(wrapper).find(selector);
+
     if (!$el.length) return;
+
     $el.empty();
+
     new frappe.Chart($el[0], {
-        type: type,
+        type: 'bar',
         data: {
             labels: labels,
-            datasets: [{ values: values }]
+            datasets: [{
+                values: values
+            }]
         },
         height: 420,
         colors: ['#2490EF']
+    });
+}
+
+function render_sales_order_analysis(
+    selector,
+    wrapper,
+    labels,
+    values
+) {
+    var $el = $(wrapper).find(selector);
+
+    if (!$el.length) return;
+
+    $el.empty();
+
+    new frappe.Chart($el[0], {
+        type: 'pie',
+        height: 380,
+
+        showLegend: false,
+
+        data: {
+            labels: labels,
+            datasets: [
+                {
+                    values: values
+                }
+            ]
+        },
+
+        colors: [
+            '#EF4444',
+            '#22C55E',
+            '#F59E0B',
+            '#8B5CF6',
+            '#2490EF',
+            '#EC4899',
+            '#14B8A6',
+            '#F97316',
+            '#6366F1',
+            '#84CC16'
+        ]
+    });
+}
+
+function render_comparison_chart(
+    selector,
+    wrapper,
+    labels,
+    current_values,
+    previous_values,
+    current_label,
+    previous_label
+) {
+    var $el = $(wrapper).find(selector);
+
+    if (!$el.length) return;
+
+    $el.empty();
+
+    current_values = current_values.map(v =>
+        v === null ? undefined : v
+    );
+
+    previous_values = previous_values.map(v =>
+        v === null ? undefined : v
+    );
+
+    new frappe.Chart($el[0], {
+        type: 'line',
+        height: 420,
+        data: {
+            labels: labels,
+            datasets: [
+                {
+                    name: current_label,
+                    values: current_values
+                },
+                {
+                    name: previous_label,
+                    values: previous_values
+                }
+            ]
+        },
+        colors: ['#2490EF', '#FF9800']
     });
 }
