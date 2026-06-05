@@ -124,7 +124,7 @@ frappe.pages['sales-insights-dashboard'].on_page_load = function(wrapper) {
                             👥 New Customers
                         </div>
 
-                        <div class="val" style="font-size:28px; font-weight:700; margin-bottom:10px;">
+                        <div class="val" style="font-size:28px; font-weight:700; margin-bottom:10px; text-align:right;">
                             ...
                         </div>
 
@@ -286,7 +286,7 @@ frappe.pages['sales-insights-dashboard'].on_page_load = function(wrapper) {
                         color:#333;
                         margin-bottom:16px;
                     ">
-                        Sales Order Trends (Current FY vs Previous FY)
+                        Sales Invoice Trends (Current FY vs Previous FY)
                     </div>
 
                     </div>
@@ -346,7 +346,7 @@ frappe.pages['sales-insights-dashboard'].on_page_load = function(wrapper) {
                             color:#333;
                             margin-bottom:4px;
                         ">
-                            📊 Category-Wise Sales Order Analysis
+                            📊 Category-Wise Sales Invoice Analysis
                         </div>
 
                         <div style="
@@ -354,7 +354,7 @@ frappe.pages['sales-insights-dashboard'].on_page_load = function(wrapper) {
                             font-size:13px;
                             margin-bottom:12px;
                         ">
-                            Distribution of Sales Orders by Status
+                            Distribution of Sales Invoices by Status
                         </div>
 
 
@@ -765,7 +765,7 @@ function render_sales_order_analysis(
         type: 'pie',
         height: 380,
 
-        showLegend: true,
+        showLegend: false,
 
         data: {
             labels: labels,
