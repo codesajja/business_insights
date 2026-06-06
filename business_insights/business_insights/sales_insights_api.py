@@ -3,7 +3,7 @@ from frappe.utils import today
 from datetime import datetime
 
 @frappe.whitelist()
-def get_insights_data():
+def get_insights_data(top_items=10):
     today_date = today()
     current_year = int(today_date[:4])
     year_start = f"{current_year}-01-01"
@@ -171,6 +171,8 @@ def get_insights_data():
     """, as_dict=True)
 
     # Item-wise Annual Sales
+    top_items = int(top_items)
+
     item_sales = frappe.db.sql("""
         SELECT
             item_name,
@@ -185,8 +187,8 @@ def get_insights_data():
         )
         GROUP BY item_name
         ORDER BY total DESC
-        LIMIT 10
-    """, (fy_start, fy_end), as_dict=True)
+        LIMIT %s
+    """, (fy_start, fy_end, top_items), as_dict=True)
 
     return {
         "annual_sales": annual_sales[0].total or 0 if annual_sales else 0,

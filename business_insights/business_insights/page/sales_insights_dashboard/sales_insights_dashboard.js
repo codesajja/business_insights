@@ -374,20 +374,44 @@ frappe.pages['sales-insights-dashboard'].on_page_load = function(wrapper) {
                 ">
 
                     <div style="
-                        font-size:18px;
-                        font-weight:700;
-                        color:#333;
+                        display:flex;
+                        justify-content:space-between;
+                        align-items:center;
                         margin-bottom:4px;
                     ">
-                        📦 Item-Wise Annual Sales
+
+                        <div style="
+                            font-size:18px;
+                            font-weight:700;
+                            color:#333;
+                        ">
+                            📦 Item-Wise Annual Sales
+                        </div>
+
+                        <select id="top-items-filter" style="
+                            padding:8px 14px;
+                            border-radius:8px;
+                            border:1px solid #468C50;
+                            font-size:13px;
+                            font-weight:700;
+                            cursor:pointer;
+                            background:#468C50;
+                            color:#FFFFFF;
+                            box-shadow:0 2px 6px rgba(70,140,80,0.25);
+                        ">
+                            <option value="5">Top 5</option>
+                            <option value="10" selected>Top 10</option>
+                            <option value="15">Top 15</option>
+                        </select>
+
                     </div>
 
-                    <div style="
+                    <div id="top-items-subtitle" style="
                         color:#6B7280;
                         font-size:13px;
                         margin-bottom:12px;
                     ">
-                        Top 10 Selling Products by Revenue
+                        Top 10 Selling Products
                     </div>
 
                     <div id="item-annual-sales-chart"></div>
@@ -408,11 +432,26 @@ frappe.pages['sales-insights-dashboard'].on_page_load = function(wrapper) {
             load_customer_kpi($(this).val(), wrapper);
         });
 
+        $(wrapper).find('#top-items-filter').on('change', function() {
+
+            let top_items = $(this).val();
+
+            $(wrapper)
+                .find('#top-items-subtitle')
+                .text(`Top ${top_items} Selling Products`);
+
+            load_all_data(wrapper, top_items);
+        });
         
 
         load_sales_kpi(30, wrapper);
         load_customer_kpi(30, wrapper);
-        load_all_data(wrapper);
+
+        $(wrapper)
+            .find('#top-items-subtitle')
+            .text('Top 10 Selling Products');
+
+        load_all_data(wrapper, 10);
 
     }, 0);
 };
@@ -529,9 +568,12 @@ function load_customer_kpi(days, wrapper) {
     });
 }
 
-function load_all_data(wrapper) {
+function load_all_data(wrapper, top_items=10) {
     frappe.call({
         method: 'business_insights.business_insights.sales_insights_api.get_insights_data',
+        args: {
+            top_items: top_items
+        },
         
         callback: function(r) {
             if (!r.message) return;
