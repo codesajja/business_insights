@@ -399,9 +399,9 @@ frappe.pages['sales-insights-dashboard'].on_page_load = function(wrapper) {
                             color:#FFFFFF;
                             box-shadow:0 2px 6px rgba(70,140,80,0.25);
                         ">
-                            <option value="5">Top 5</option>
-                            <option value="10" selected>Top 10</option>
-                            <option value="15">Top 15</option>
+                            <option value="5">Top 5 Products</option>
+                            <option value="10" selected>Top 10 Products</option>
+                            <option value="15">Top 15 Products</option>
                         </select>
 
                     </div>
