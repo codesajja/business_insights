@@ -10,6 +10,7 @@ frappe.pages['sales-insights-dashboard'].on_page_load = function(wrapper) {
     setTimeout(function() {
         
         $(wrapper).find(".layout-main").html(`
+        
             <div style="
                 max-width:1800px;
                 width:100%;
@@ -72,7 +73,7 @@ frappe.pages['sales-insights-dashboard'].on_page_load = function(wrapper) {
                     <div id="kpi-annual-sales" style="background:linear-gradient(135deg, #2490EF, #1a6fb5); border-radius:8px; padding:24px 28px; box-shadow:0 4px 12px rgba(36,144,239,0.3); color:#fff; position:relative; overflow:hidden;">
                         <div style="position:absolute; top:-20px; right:-20px; width:100px; height:100px; background:rgba(255,255,255,0.1); border-radius:50%;"></div>
 
-                        <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; margin-bottom:10px;">
+                        <div style="font-size:14px; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; margin-bottom:10px;">
                             $ Annual Sales
                         </div>
 
@@ -94,7 +95,7 @@ frappe.pages['sales-insights-dashboard'].on_page_load = function(wrapper) {
 
                         <div style="position:absolute; top:-20px; right:-20px; width:100px; height:100px; background:rgba(255,255,255,0.1); border-radius:50%;"></div>
 
-                        <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; margin-bottom:10px;">
+                        <div style="font-size:14px; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; margin-bottom:10px;">
                             💵 Total Sales
                         </div>
 
@@ -120,7 +121,7 @@ frappe.pages['sales-insights-dashboard'].on_page_load = function(wrapper) {
                     <div id="kpi-new-customers" style="background:linear-gradient(135deg, #36B37E, #27855c); border-radius:8px; padding:24px 28px; box-shadow:0 4px 12px rgba(54,179,126,0.3); color:#fff; position:relative; overflow:hidden;">
                         <div style="position:absolute; top:-20px; right:-20px; width:100px; height:100px; background:rgba(255,255,255,0.1); border-radius:50%;"></div>
 
-                        <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1.5px;  margin-bottom:10px;">
+                        <div style="font-size:14px; font-weight:700; text-transform:uppercase; letter-spacing:1.5px;  margin-bottom:10px;">
                             👥 New Customers
                         </div>
 
@@ -136,7 +137,7 @@ frappe.pages['sales-insights-dashboard'].on_page_load = function(wrapper) {
                     <div id="kpi-today-sales" style="background:linear-gradient(135deg, #FF5630, #cc3d1f); border-radius:8px; padding:24px 28px; box-shadow:0 4px 12px rgba(255,86,48,0.3); color:#fff; position:relative; overflow:hidden;">
                         <div style="position:absolute; top:-20px; right:-20px; width:100px; height:100px; background:rgba(255,255,255,0.1); border-radius:50%;"></div>
 
-                        <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; margin-bottom:10px;">
+                        <div style="font-size:14px; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; margin-bottom:10px;">
                             📅 Today's Sales
                         </div>
 
